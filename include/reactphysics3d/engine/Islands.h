@@ -78,7 +78,6 @@ struct Islands {
         ~Islands() = default;
 
         /// Assignment operator
-        Islands& operator=(const Islands& island) = default;
 
         /// Copy-constructor
         Islands(const Islands& island) = default;
