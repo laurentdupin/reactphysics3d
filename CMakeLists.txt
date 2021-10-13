@@ -256,7 +256,7 @@ set_target_properties(reactphysics3d PROPERTIES CXX_EXTENSIONS OFF)
 # Compile with warning messages
 target_compile_options(reactphysics3d PRIVATE
   $<$<CXX_COMPILER_ID:MSVC>:/W3> 
-  $<$<CXX_COMPILER_ID:GNU>:-Wno-class-memaccess> 
+  $<$<CXX_COMPILER_ID:GNU>:-Wno-class-memaccess -Wno-maybe-uninitialized> 
   $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wno-reorder -Wno-unused-result -Wno-unused-variable -Wno-unused-private-field>
 )
 
