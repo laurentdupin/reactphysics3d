@@ -104,8 +104,11 @@ class DefaultLogger : public Logger {
                     auto time = std::chrono::system_clock::to_time_t(now);
 
                     struct tm newtime;
+#ifdef _MSC_VER
                     localtime_s(&newtime, &time);
-
+#else
+                    localtime_r(&time, &newtime);
+#endif
                     std::stringstream ss;
                     ss << "ReactPhysics3D Logs" << std::endl;
                     ss << "ReactPhysics3D Version: " << RP3D_VERSION << std::endl;
@@ -121,7 +124,11 @@ class DefaultLogger : public Logger {
                     std::stringstream ss;
 
                     struct tm newtime;
+#ifdef _MSC_VER
                     localtime_s(&newtime, &time);
+#else
+                    localtime_r(&time, &newtime);
+#endif
 
                     // Time
                     ss << std::put_time(&newtime, "%X") << " ";
@@ -160,7 +167,11 @@ class DefaultLogger : public Logger {
                     auto time = std::chrono::system_clock::to_time_t(now);
 
                     struct tm newtime;
+#ifdef _MSC_VER
                     localtime_s(&newtime, &time);
+#else
+                    localtime_r(&time, &newtime);
+#endif
 
                     std::stringstream ss;
                     ss << "<!DOCTYPE HTML>" << std::endl;
@@ -287,7 +298,11 @@ class DefaultLogger : public Logger {
                     ss << "<div class='line " + toLowerCase(getCategoryName(category)) + " " + toLowerCase(getLevelName(level)) + "'>";
 
                     struct tm newtime;
+#ifdef _MSC_VER
                     localtime_s(&newtime, &time);
+#else
+                    localtime_r(&time, &newtime);
+#endif
 
                     // Time
                     ss << "<div class='time'>";
