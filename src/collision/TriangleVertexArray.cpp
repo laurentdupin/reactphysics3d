@@ -167,9 +167,9 @@ void TriangleVertexArray::computeVerticesNormals() {
             Vector3 normalComponent = arcSinA * crossProduct;
 
             // Add the normal component of this vertex into the normals array
-            verticesNormals[verticesIndices[v] * 3] += normalComponent.x;
-            verticesNormals[verticesIndices[v] * 3 + 1] += normalComponent.y;
-            verticesNormals[verticesIndices[v] * 3 + 2] += normalComponent.z;
+            verticesNormals[verticesIndices[v] * 3] += (float)normalComponent.x;
+            verticesNormals[verticesIndices[v] * 3 + 1] += (float)normalComponent.y;
+            verticesNormals[verticesIndices[v] * 3 + 2] += (float)normalComponent.z;
         }
     }
 
@@ -180,9 +180,9 @@ void TriangleVertexArray::computeVerticesNormals() {
         Vector3 normal(verticesNormals[v], verticesNormals[v + 1], verticesNormals[v + 2]);
         normal.normalize();
 
-        verticesNormals[v] = normal.x;
-        verticesNormals[v + 1] = normal.y;
-        verticesNormals[v + 2] = normal.z;
+        verticesNormals[v] = (float)normal.x;
+        verticesNormals[v + 1] = (float)normal.y;
+        verticesNormals[v + 2] = (float)normal.z;
     }
 
     const void* verticesNormalsPointer = static_cast<const void*>(verticesNormals);

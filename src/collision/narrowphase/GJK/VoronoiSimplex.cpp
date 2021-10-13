@@ -313,7 +313,7 @@ void VoronoiSimplex::computeClosestPointOnSegment(const Vector3& a, const Vector
 
         // If the closest point is on the segment AB
         if (APDotAB < lengthABSquare) {
-            t = APDotAB / lengthABSquare;
+            t = (float)(APDotAB / lengthABSquare);
 
             bitUsedVertices = 3; // 0011 (both A and B are used)
 

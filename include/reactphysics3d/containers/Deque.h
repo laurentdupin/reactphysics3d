@@ -112,9 +112,9 @@ class Deque {
 
                 return mChunks[chunkIndex][itemIndex];
             }
-            else {
-                assert(false);
-            }
+
+            assert(false);
+            return mChunks[0][0];
         }
 
         /// Add more chunks
@@ -503,6 +503,7 @@ class Deque {
                 return mChunks[mFirstChunkIndex][mFirstItemIndex];
             }
             assert(false);
+            return mChunks[mFirstChunkIndex][mFirstItemIndex];
         }
 
         /// Return a reference to the last item of the deque

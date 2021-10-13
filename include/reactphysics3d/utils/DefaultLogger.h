@@ -103,10 +103,13 @@ class DefaultLogger : public Logger {
                     auto now = std::chrono::system_clock::now();
                     auto time = std::chrono::system_clock::to_time_t(now);
 
+                    struct tm newtime;
+                    localtime_s(&newtime, &time);
+
                     std::stringstream ss;
                     ss << "ReactPhysics3D Logs" << std::endl;
                     ss << "ReactPhysics3D Version: " << RP3D_VERSION << std::endl;
-                    ss << "Date: " << std::put_time(std::localtime(&time), "%Y-%m-%d") << std::endl;
+                    ss << "Date: " << std::put_time(&newtime, "%Y-%m-%d") << std::endl;
                     ss << "---------------------------------------------------------" << std::endl;
 
                     return ss.str();
@@ -117,8 +120,11 @@ class DefaultLogger : public Logger {
                                            Level level, Category category, const char* filename, int lineNumber) override {
                     std::stringstream ss;
 
+                    struct tm newtime;
+                    localtime_s(&newtime, &time);
+
                     // Time
-                    ss << std::put_time(std::localtime(&time), "%X") << " ";
+                    ss << std::put_time(&newtime, "%X") << " ";
 
                     // World
                     ss << "World:" << physicsWorldName << std::endl;
@@ -153,6 +159,9 @@ class DefaultLogger : public Logger {
                     auto now = std::chrono::system_clock::now();
                     auto time = std::chrono::system_clock::to_time_t(now);
 
+                    struct tm newtime;
+                    localtime_s(&newtime, &time);
+
                     std::stringstream ss;
                     ss << "<!DOCTYPE HTML>" << std::endl;
                     ss << "<html>" << std::endl;
@@ -164,7 +173,7 @@ class DefaultLogger : public Logger {
                     ss << "<h1>ReactPhysics3D Logs</h1>" << std::endl;
                     ss << "<div class='general_info'>" << std::endl;
                     ss << "<p>ReactPhysics3D version: " << RP3D_VERSION << "</p>" << std::endl;
-                    ss << "<p>Date: " << std::put_time(std::localtime(&time), "%Y-%m-%d") << "</p>" << std::endl;
+                    ss << "<p>Date: " << std::put_time(&newtime, "%Y-%m-%d") << "</p>" << std::endl;
                     ss << "</div>" << std::endl;
                     ss << "<hr>";
 
@@ -277,9 +286,12 @@ class DefaultLogger : public Logger {
 
                     ss << "<div class='line " + toLowerCase(getCategoryName(category)) + " " + toLowerCase(getLevelName(level)) + "'>";
 
+                    struct tm newtime;
+                    localtime_s(&newtime, &time);
+
                     // Time
                     ss << "<div class='time'>";
-                    ss << std::put_time(std::localtime(&time), "%X");
+                    ss << std::put_time(&newtime, "%X");
                     ss << "</div>";
 
                     // Message

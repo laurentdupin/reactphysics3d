@@ -79,7 +79,7 @@ OverlappingPairs::~OverlappingPairs() {
         }
 
         // Size for the data of a single pair (in bytes)
-        const size_t totalSizeBytes = mNbAllocatedPairs * mPairDataSize;
+        const size_t totalSizeBytes = (size_t)mNbAllocatedPairs * mPairDataSize;
 
         // Release the allocated memory
         mPersistentAllocator.release(mBuffer, totalSizeBytes);
@@ -194,7 +194,7 @@ void OverlappingPairs::allocate(uint64 nbPairsToAllocate) {
     assert(nbPairsToAllocate > mNbAllocatedPairs);
 
     // Size for the data of a single component (in bytes)
-    const size_t totalSizeBytes = nbPairsToAllocate * mPairDataSize;
+    const size_t totalSizeBytes = (size_t)nbPairsToAllocate * mPairDataSize;
 
     // Allocate memory
     void* newBuffer = mPersistentAllocator.allocate(totalSizeBytes);
@@ -218,21 +218,21 @@ void OverlappingPairs::allocate(uint64 nbPairsToAllocate) {
     if (mNbPairs > 0) {
 
         // Copy component data from the previous buffer to the new one
-        memcpy(newPairIds, mPairIds, mNbPairs * sizeof(uint64));
-        memcpy(newPairBroadPhaseId1, mPairBroadPhaseId1, mNbPairs * sizeof(int32));
-        memcpy(newPairBroadPhaseId2, mPairBroadPhaseId2, mNbPairs * sizeof(int32));
-        memcpy(newColliders1, mColliders1, mNbPairs * sizeof(Entity));
-        memcpy(newColliders2, mColliders2, mNbPairs * sizeof(Entity));
-        memcpy(newLastFrameCollisionInfos, mLastFrameCollisionInfos, mNbPairs * sizeof(Map<uint64, LastFrameCollisionInfo*>));
-        memcpy(newNeedToTestOverlap, mNeedToTestOverlap, mNbPairs * sizeof(bool));
-        memcpy(newIsActive, mIsActive, mNbPairs * sizeof(bool));
-        memcpy(newNarrowPhaseAlgorithmType, mNarrowPhaseAlgorithmType, mNbPairs * sizeof(NarrowPhaseAlgorithmType));
-        memcpy(newIsShape1Convex, mIsShape1Convex, mNbPairs * sizeof(bool));
-        memcpy(wereCollidingInPreviousFrame, mCollidingInPreviousFrame, mNbPairs * sizeof(bool));
-        memcpy(areCollidingInCurrentFrame, mCollidingInCurrentFrame, mNbPairs * sizeof(bool));
+        memcpy(newPairIds, mPairIds, (size_t)mNbPairs * sizeof(uint64));
+        memcpy(newPairBroadPhaseId1, mPairBroadPhaseId1, (size_t)mNbPairs * sizeof(int32));
+        memcpy(newPairBroadPhaseId2, mPairBroadPhaseId2, (size_t)mNbPairs * sizeof(int32));
+        memcpy(newColliders1, mColliders1, (size_t)mNbPairs * sizeof(Entity));
+        memcpy(newColliders2, mColliders2, (size_t)mNbPairs * sizeof(Entity));
+        memcpy(newLastFrameCollisionInfos, mLastFrameCollisionInfos, (size_t)mNbPairs * sizeof(Map<uint64, LastFrameCollisionInfo*>));
+        memcpy(newNeedToTestOverlap, mNeedToTestOverlap, (size_t)mNbPairs * sizeof(bool));
+        memcpy(newIsActive, mIsActive, (size_t)mNbPairs * sizeof(bool));
+        memcpy(newNarrowPhaseAlgorithmType, mNarrowPhaseAlgorithmType, (size_t)mNbPairs * sizeof(NarrowPhaseAlgorithmType));
+        memcpy(newIsShape1Convex, mIsShape1Convex, (size_t)mNbPairs * sizeof(bool));
+        memcpy(wereCollidingInPreviousFrame, mCollidingInPreviousFrame, (size_t)mNbPairs * sizeof(bool));
+        memcpy(areCollidingInCurrentFrame, mCollidingInCurrentFrame, (size_t)mNbPairs * sizeof(bool));
 
         // Deallocate previous memory
-        mPersistentAllocator.release(mBuffer, mNbAllocatedPairs * mPairDataSize);
+        mPersistentAllocator.release(mBuffer, (size_t)mNbAllocatedPairs * mPairDataSize);
     }
 
     mBuffer = newBuffer;

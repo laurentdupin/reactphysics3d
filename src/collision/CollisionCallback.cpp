@@ -125,6 +125,6 @@ CollisionCallback::ContactPair CollisionCallback::CallbackData::getContactPair(u
     else {
 
         // Return a lost contact pair
-        return CollisionCallback::ContactPair(mLostContactPairs[mLostContactPairsIndices[index - mContactPairsIndices.size()]], mContactPoints, mWorld, true);
+        return CollisionCallback::ContactPair(mLostContactPairs[mLostContactPairsIndices[(uint)(index - mContactPairsIndices.size())]], mContactPoints, mWorld, true);
     }
 }
